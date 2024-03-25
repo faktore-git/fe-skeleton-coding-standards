@@ -14,7 +14,7 @@ jobs:
         name: CI Action
         steps:
             - name: Execute remote action
-              uses: faktore-git/fe-skeleton-coding-standards
+              uses: faktore-git/fe-skeleton-coding-standards@production
               id: ci
               with:
                   phpversion: "8.2"
