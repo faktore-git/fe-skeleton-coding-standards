@@ -29,7 +29,7 @@
         ".phpstorm.meta.php": "/.phpstorm.meta.php",
         "phpstorm.inspections.xml": "/phpstorm.inspections.xml",
         ".editorconfig": "/.editorconfig",
-        ".github/workflows/ci.yml.example": "/.github/workflows/ci.yml.example"
+        ".github/workflows/ci.yml.example": "/.github/workflows/ci.yml"
       }
     }
   }
