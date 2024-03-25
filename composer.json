@@ -13,6 +13,7 @@
       "FaktorE\\CLI\\Sniffy\\": "src/"
     }
   },
+  "license": "proprietary",
   "suggest": {
     "faktore/fe-skeleton-composer-installer": "Used to evaluate dirmap/dirmapOnce instructions to place files in your project."
   },
