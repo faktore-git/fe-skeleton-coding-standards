@@ -17,6 +17,9 @@
   "suggest": {
     "faktore/fe-skeleton-composer-installer": "Used to evaluate dirmap/dirmapOnce instructions to place files in your project."
   },
+  "config": {
+    "bin-dir": "bin"
+  },
   "extra": {
     "faktore/fe-skeleton": {
       "dirmapOnce": {

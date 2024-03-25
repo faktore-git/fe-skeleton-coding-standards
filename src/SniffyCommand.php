@@ -15,7 +15,7 @@ use Symfony\Component\Finder\Finder;
 final class SniffyCommand extends Command
 {
     protected static $defaultName = 'Sniffy';
-    protected string $sniffyStorage = __DIR__ . '/Sniffy.json';
+    protected string $sniffyStorage = __DIR__ . '/../../../../Sniffy.json';
     protected array $sniffs = [];
     protected array $unmatchedSniffs = [];
 
@@ -66,7 +66,7 @@ final class SniffyCommand extends Command
                     InputArgument::OPTIONAL,
                     'Defines the "Standards" directory of PHP_CodeSniffer, '
                     . 'relative to current directory (<info>' . __DIR__ . '/</info>).',
-                    '../vendor/squizlabs/php_codesniffer/src/Standards'
+                    '../../../squizlabs/php_codesniffer/src/Standards'
                 ),
 
                 new InputArgument(
@@ -74,7 +74,7 @@ final class SniffyCommand extends Command
                     InputArgument::OPTIONAL,
                     'Defines the directory and filename to your ruleset xml. '
                     . 'relative to current directory (<info>' . __DIR__ . '/</info>).',
-                    '../phpcs.xml'
+                    '../../../../phpcs.xml'
                 ),
             ]
         );

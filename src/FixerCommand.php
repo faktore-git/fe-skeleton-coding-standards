@@ -15,7 +15,7 @@ use Symfony\Component\Finder\Finder;
 
 final class FixerCommand extends Command
 {
-    protected string $sniffyStorage = __DIR__ . '/Fixer.json';
+    protected string $sniffyStorage = __DIR__ . '/../../../../Fixer.json';
     protected static $defaultName = 'Sniffy';
     protected array $sniffs = [];
     protected array $unmatchedSniffs = [];
@@ -67,7 +67,7 @@ final class FixerCommand extends Command
                     InputArgument::OPTIONAL,
                     'Defines the "Standards" directory of PHP_CodeSniffer, '
                     . 'relative to current directory (<info>' . __DIR__ . '/</info>).',
-                    '../vendor/friendsofphp/php-cs-fixer/src/RuleSet/Sets'
+                    '../../../friendsofphp/php-cs-fixer/src/RuleSet/Sets'
                 ),
 
                 new InputArgument(
@@ -75,7 +75,7 @@ final class FixerCommand extends Command
                     InputArgument::OPTIONAL,
                     'Defines the directory and filename to your ruleset configuration, '
                     . 'relative to current directory (<info>' . __DIR__ . '/</info>).',
-                    '../.php-cs-fixer.php'
+                    '../../../../.php-cs-fixer.php'
                 ),
             ]
         );
