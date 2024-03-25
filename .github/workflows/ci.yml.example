@@ -1,0 +1,21 @@
+name: CI with Composer scripts (EXAMPLE)
+on:
+    schedule:
+        - cron: '35 9,15 * * 1-5'
+    push:
+        branches:
+          - production
+          - main
+permissions:
+    contents: read
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name: CI Action
+        steps:
+            - name: Execute remote action
+              uses: faktore-git/fe-skeleton-coding-standards
+              id: ci
+              with:
+                  phpversion: "8.2"
+                  branch: "production"

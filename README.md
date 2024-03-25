@@ -62,7 +62,7 @@ marker to do so.
 * .phpstorm.meta.php (PHPStorm helper)
 * phpstorm.inspections.xml (PHPStorm inspections)
 * .editorconfig
-* .github/workflows/main.yml (Workflow)
+* .github/workflows/ci.yml (Workflow)
 
 ## Provided applications/code
 
