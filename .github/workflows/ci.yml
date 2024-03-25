@@ -1,0 +1,18 @@
+name: CI with Composer scripts
+on:
+    schedule:
+        - cron: '35 9,15 * * 1-5'
+    push:
+        branches:
+          - production
+          - main
+permissions:
+    contents: read
+jobs:
+    name: CI Action
+    uses: faktore-git/fe-skeleton-coding-standards
+    id: ci
+    with:
+        phpversion: "8.2"
+        runs-on: ubuntu-latest
+        branch: "production"

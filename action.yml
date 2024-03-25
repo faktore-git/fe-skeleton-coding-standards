@@ -1,0 +1,152 @@
+name: CI with Composer scripts
+description: 'Checks PHP code quality and errors'
+branding:
+    icon: 'eye'
+    color: 'orange'
+inputs:
+    branch:
+        description: "GIT branch to check"
+        required: false
+        default: "production"
+    phpversion:
+        description:" PHP version"
+        required: false
+        default: "8.2"
+runs:
+    php-lint:
+        name: "PHP linter"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ inputs.branch }}
+            - name: "Install PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "${{ matrix.php-version }}"
+                  coverage: none
+                  tools: composer:v2
+            - name: "Show the Composer configuration"
+              run: "composer config --global --list"
+            - name: "Kill fe-skeleton"
+              run: |
+                  composer config --unset "repositories.skeleton-build"
+                  composer config --unset "repositories.skeleton-composer-installer"
+                  composer config --unset "repositories.skeleton-composer-templates"
+                  composer config --unset "repositories.skeleton-ddev"
+                  composer config --unset "repositories.skeleton-ddev-commands"
+                  composer config --unset "repositories.skeleton-vite"
+                  composer config --unset "repositories.skeleton-deployment"
+                  composer config --unset "repositories.skeleton-typo3"
+                  composer config --unset "repositories.skeleton-standards"
+                  rm composer.lock
+                  composer remove --no-update --dev "faktore/fe-skeleton-*"
+                  cat composer.json
+                  composer install
+            - name: "Run PHP lint"
+              run: "composer ci:php:lint"
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version:
+                    - ${{ inputs.phpversion }}
+    code-quality:
+        name: "Code quality checks"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ inputs.branch }}
+            - name: "Install PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "${{ matrix.php-version }}"
+                  coverage: none
+                  tools: composer:v2
+            - name: "Show Composer version"
+              run: "composer --version"
+            - name: "Show the Composer configuration"
+              run: "composer config --global --list"
+            - name: "Kill fe-skeleton"
+              run: |
+                  composer config --unset "repositories.skeleton-build"
+                  composer config --unset "repositories.skeleton-composer-installer"
+                  composer config --unset "repositories.skeleton-composer-templates"
+                  composer config --unset "repositories.skeleton-ddev"
+                  composer config --unset "repositories.skeleton-ddev-commands"
+                  composer config --unset "repositories.skeleton-vite"
+                  composer config --unset "repositories.skeleton-deployment"
+                  composer config --unset "repositories.skeleton-typo3"
+                  composer config --unset "repositories.skeleton-standards"
+                  rm composer.lock
+                  composer remove --no-update --dev "faktore/fe-skeleton-*"
+                  cat composer.json
+                  composer install
+            - name: "Cache dependencies installed with composer"
+              uses: actions/cache@v4
+              with:
+                  key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
+                  path: ~/.cache/composer
+                  restore-keys: "php${{ matrix.php-version }}-composer-\n"
+            - name: "Install Composer dependencies"
+              run: "composer update --no-progress"
+            - name: "Run command"
+              run: "composer ci:${{ matrix.command }}"
+        strategy:
+            fail-fast: false
+            matrix:
+                command:
+                    - "composer:psr-verify"
+                    - "php:cs-fixer"
+                    - "php:sniff"
+                    - "php:stan"
+                php-version:
+                    - ${{ inputs.phpversion }}
+    check_status:
+        needs: [php-lint, code-quality]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Slack SUCCESS
+              if: ${{ success() }}
+              id: slack-success
+              uses: slackapi/slack-github-action@v1.25.0
+              with:
+                payload: |
+                  {
+                    "text": "GitHub Action build: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "GitHub Action build: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                        }
+                      }
+                    ]
+                  }
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+            - name: Slack FAILURE
+              if: ${{ failure() }}
+              id: slack-fail
+              uses: slackapi/slack-github-action@v1.25.0
+              with:
+                payload: |
+                  {
+                    "text": "GitHub Action build !!!FAILURE!!!: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "GitHub Action build !!!FAILURE!!!: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                        }
+                      }
+                    ]
+                  }
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

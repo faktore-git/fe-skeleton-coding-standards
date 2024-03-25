@@ -1,0 +1,35 @@
+{
+  "name": "faktore/fe-skeleton-coding-standards",
+  "type": "fe-skeleton-extension",
+  "description": "Defines a common set for coding standards",
+  "authors": [
+    {
+      "name": "Garvin Hicking",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "FaktorE\\CLI\\Sniffy": "src/"
+    }
+  },
+  "suggest": {
+    "faktore/fe-skeleton-composer-installer": "Used to evaluate dirmap/dirmapOnce instructions to place files in your project."
+  },
+  "extra": {
+    "faktore/fe-skeleton": {
+      "dirmapOnce": {
+        "phpstan-baseline.neon": "./phpstan-baseline.neon"
+      },
+      "dirmap": {
+        "phpcs.xml": "phpcs.xml",
+        ".php-cs-fixer.php": ".php-cs-fixer.php",
+        "phpstan.neon": "phpstan.neon",
+        ".phpstorm.meta.php": ".phpstorm.meta.php",
+        "phpstorm.inspections.xml": "phpstorm.inspections.xml",
+        ".editorconfig": ".editorconfig",
+        ".github/workflows/main.yml": ".github/workflows/main.yml"
+      }
+    }
+  }
+}

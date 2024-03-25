@@ -1,0 +1,44 @@
+{
+	"scripts": {
+		"phpcs": "phpcs --standard=phpcs.xml",
+		"ci:composer:psr-verify": "@composer dumpautoload --optimize --strict-psr --no-plugins",
+		"ci:php": [
+			"@ci:php:cs-fixer",
+			"@ci:php:lint",
+			"@ci:php:sniff",
+			"@ci:php:stan"
+		],
+		"ci:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --diff",
+		"ci:php:lint": "find .*.php *.php packages -name '*.php' -print0 | xargs -r -0 -n 1 -P 4 php -l",
+		"ci:php:sniff": "phpcs packages",
+		"ci:php:stan": "phpstan --no-progress",
+		"ci:static": [
+			"@ci:php:cs-fixer",
+			"@ci:php:lint",
+			"@ci:php:sniff",
+			"@ci:php:stan",
+			"@ci:yaml:lint"
+		],
+		"fix:php": [
+			"@fix:php:cs",
+			"@fix:php:sniff"
+		],
+		"fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.php",
+		"fix:php:sniff": "phpcbf packages",
+		"phpstan:baseline": "phpstan --generate-baseline --allow-empty-baseline"
+	},
+
+	"scripts-descriptions": {
+		"ci:composer:psr-verify": "Verifies PSR-4 namespace correctness.",
+		"ci:php": "Runs all static checks for the PHP files.",
+		"ci:php:cs-fixer": "Checks the code style with the PHP Coding Standards Fixer (PHP-CS-Fixer).",
+		"ci:php:lint": "Lints the PHP files for syntax errors.",
+		"ci:php:sniff": "Checks the code style with PHP_CodeSniffer (PHPCS).",
+		"ci:php:stan": "Checks the PHP types using PHPStan.",
+		"ci:static": "Runs all static code checks (syntax, style, types).",
+		"fix:php": "Runs all fixers for the PHP code.",
+		"fix:php:cs": "Fixes the code style with PHP-CS-Fixer.",
+		"fix:php:sniff": "Fixes the code style with PHP_CodeSniffer.",
+		"phpstan:baseline": "Updates the PHPStan baseline file to match the code."
+	}
+}
