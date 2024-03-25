@@ -70,3 +70,8 @@ A simple Symfony CLI Console Command is provided as:
 
 * vendor/faktore-git/fe-skeleton-coding-standards/Sniffy (inspection helper)
 
+## Reset script
+
+```
+rm phpcs.xml .php-cs-fixer.php phpstan.neon .phpstorm.meta.php phpstorm.inspections.xml .editorconfig .github/workflows/main.yml .github/workflows/ci.yml
+```

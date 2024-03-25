@@ -20,16 +20,16 @@
   "extra": {
     "faktore/fe-skeleton": {
       "dirmapOnce": {
-        "phpstan-baseline.neon": "./phpstan-baseline.neon"
+        "phpstan-baseline.neon": "/phpstan-baseline.neon"
       },
       "dirmap": {
-        "phpcs.xml": "phpcs.xml",
-        ".php-cs-fixer.php": ".php-cs-fixer.php",
-        "phpstan.neon": "phpstan.neon",
-        ".phpstorm.meta.php": ".phpstorm.meta.php",
-        "phpstorm.inspections.xml": "phpstorm.inspections.xml",
-        ".editorconfig": ".editorconfig",
-        ".github/workflows/ci.yml.example": ".github/workflows/ci.yml.example"
+        "phpcs.xml": "/phpcs.xml",
+        ".php-cs-fixer.php": "/.php-cs-fixer.php",
+        "phpstan.neon": "/phpstan.neon",
+        ".phpstorm.meta.php": "/.phpstorm.meta.php",
+        "phpstorm.inspections.xml": "/phpstorm.inspections.xml",
+        ".editorconfig": "/.editorconfig",
+        ".github/workflows/ci.yml.example": "/.github/workflows/ci.yml.example"
       }
     }
   }
