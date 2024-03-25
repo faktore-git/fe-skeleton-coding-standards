@@ -2,7 +2,7 @@
 
 Coding Standards (phpstan, php-cs-fixer, php_sniffer, github build)
 
-Also provides a render-action "faktore-git/fe-skeleton-coding-standards"
+Also provides a render-action ".github/workflows/ci.yml.example"
 which uses a simple CI pipeline, and posting to slack.
 
 Requires you to set a SLACK_WEBHOOK_URL secret to point to your

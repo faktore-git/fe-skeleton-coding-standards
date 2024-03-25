@@ -20,8 +20,14 @@
   "config": {
     "bin-dir": "bin"
   },
+  "bin": [
+    "bin/Sniffy"
+  ],
   "extra": {
     "faktore/fe-skeleton": {
+      "gitignore": [
+        "/.php-cs-fixer.cache"
+      ],
       "dirmapOnce": {
         "phpstan-baseline.neon": "/phpstan-baseline.neon"
       },
