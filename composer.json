@@ -23,6 +23,9 @@
   "bin": [
     "bin/Sniffy"
   ],
+  "require": {
+    "symfony/console": "*"
+  },
   "extra": {
     "faktore/fe-skeleton": {
       "gitignore": [
