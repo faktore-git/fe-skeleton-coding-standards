@@ -9,7 +9,7 @@
 			"@ci:php:stan"
 		],
 		"ci:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --diff",
-		"ci:php:lint": "find .*.php *.php packages -name '*.php' -print0 | xargs -r -0 -n 1 -P 4 php -l",
+		"ci:php:lint": "find .*.php *.php packages -name '*.php' -print0 2>/dev/null | xargs -r -0 -n 1 -P 4 php -l 1>/dev/null",
 		"ci:php:sniff": "phpcs packages",
 		"ci:php:stan": "phpstan --no-progress --memory-limit=2G",
 		"ci:static": [
