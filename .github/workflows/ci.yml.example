@@ -11,6 +11,7 @@ on:
             - main
 env:
     CI_GIT_BRANCH: 'feature/vite'
+    ACTION_URL: 'https://github.com/faktore-git/grur/actions'
 
 permissions:
     contents: read
@@ -115,13 +116,13 @@ jobs:
               with:
                 payload: |
                   {
-                    "text": "❌ Build failure\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+                    "text": "❌ Build failure\n${{ github.event.pull_request.html_url || github.event.head_commit.url || env.ACTION_URL }}",
                     "blocks": [
                       {
                         "type": "section",
                         "text": {
                           "type": "mrkdwn",
-                          "text": "❌ Build failure\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                          "text": "❌ Build failure\n${{ github.event.pull_request.html_url || github.event.head_commit.url || env.ACTION_URL }}"
                         }
                       }
                     ]
@@ -141,13 +142,13 @@ jobs:
           with:
             payload: |
               {
-                "text": "✅ Build success\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+                "text": "✅ Build success\n${{ github.event.pull_request.html_url || github.event.head_commit.url || env.ACTION_URL }}",
                 "blocks": [
                   {
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-                      "text": "✅ Build success\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                      "text": "✅ Build success\n${{ github.event.pull_request.html_url || github.event.head_commit.url || env.ACTION_URL }}"
                     }
                   }
                 ]
