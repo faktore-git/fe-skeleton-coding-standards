@@ -50,6 +50,19 @@ final class GithookCommand extends Command
                     ),
                     'auto'
                 ),
+                new InputOption(
+                    'remove',
+                    'r',
+                    InputOption::VALUE_NONE,
+                    'When set, the pre-commit git hook will be removed.'
+                ),
+                new InputOption(
+                    'force',
+                    'f',
+                    InputOption::VALUE_NONE,
+                    'When set and used with option "--remove", the pre-commit git hook will '
+                    . 'be removed even if it does not match expected contents.'
+                ),
             ]
         );
     }
@@ -163,13 +176,44 @@ EOT;
         $githookFile = $gitDir . DIRECTORY_SEPARATOR . 'hooks' . DIRECTORY_SEPARATOR . 'pre-commit';
         if (file_exists($githookFile)) {
             if ($githookContent === file_get_contents($githookFile)) {
+                if ($input->getOption('remove')) {
+                    $output->writeln(
+                        sprintf(
+                            '<info>Removed git hook in: <comment>%s</comment></info>',
+                            $githookFile
+                        )
+                    );
+                    unlink($githookFile);
+                    return Command::SUCCESS;
+                }
+
                 $output->writeln(
                     sprintf(
-                        '<info>This git hook already exists in <comment>%s</comment>.</info>',
+                        '<info>This git hook already exists in: <comment>%s</comment></info>',
                         $githookFile
                     )
                 );
                 return Command::SUCCESS;
+            } elseif ($input->getOption('remove')) {
+                if ($input->getOption('force')) {
+                    $output->writeln(
+                        sprintf(
+                            '<info>Removed git hook WITH FORCE in: <comment>%s</comment></info>',
+                            $githookFile
+                        )
+                    );
+                    unlink($githookFile);
+                    return Command::SUCCESS;
+                } else {
+                    $output->writeln(
+                        sprintf(
+                            '<error>Could not remove git hook, does not contain expected input in: <comment>%s</comment></error>',
+                            $githookFile
+                        )
+                    );
+
+                    return Command::FAILURE;
+                }
             }
 
             $output->writeln(
@@ -178,6 +222,15 @@ EOT;
                     $githookFile
                 )
             );
+            return Command::FAILURE;
+        } elseif ($input->getOption('remove')) {
+            $output->writeln(
+                sprintf(
+                    '<error>No existing git hook found, cannot remove: <comment>%s</comment></error>',
+                    $githookFile
+                )
+            );
+
             return Command::FAILURE;
         }
 
@@ -193,7 +246,7 @@ EOT;
 
         $output->writeln(
             sprintf(
-                '<info>Created git hook in <comment>%s</comment></info>',
+                '<info>Created git hook in: <comment>%s</comment></info>',
                 $githookFile
             )
         );
