@@ -72,6 +72,11 @@ $rules = [
     'whitespace_after_comma_in_array' => ['ensure_single_space' => true],
     'yoda_style' => ['equal' => false, 'identical' => false, 'less_and_greater' => false],
 
+    // nullable parameters, PHP 8.4
+    'nullable_type_declaration' => [
+        'syntax' => 'question_mark',
+    ],
+    'nullable_type_declaration_for_default_null_value' => true,
 ];
 
 $config = new Config('FaktorE');
