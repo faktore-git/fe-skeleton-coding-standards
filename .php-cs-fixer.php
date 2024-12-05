@@ -82,6 +82,7 @@ $rules = [
 $config = new Config('FaktorE');
 $config
     ->setRiskyAllowed(true)
+    ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setRules($rules);
 $config->getFinder()->in('packages');
 
