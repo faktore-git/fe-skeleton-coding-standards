@@ -76,7 +76,10 @@
     <rule ref="PEAR.Commenting.InlineComment"/>
     <rule ref="Squiz.Commenting.DocCommentAlignment"/>
     <rule ref="Squiz.Commenting.EmptyCatchComment"/>
-    <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag">
+        <!-- disable errors on multiple @throws tags -->
+        <exclude name="Squiz.Commenting.FunctionCommentThrowTag.WrongNumber"/>
+    </rule>
 
     <!-- Control structures -->
     <rule ref="PEAR.ControlStructures.ControlSignature"/>
@@ -84,7 +87,7 @@
     <!-- Files -->
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="140"/>
+            <property name="lineLimit" value="200"/>
             <property name="absoluteLineLimit" value="220"/>
         </properties>
         <exclude-pattern>Configuration/TCA/</exclude-pattern>
