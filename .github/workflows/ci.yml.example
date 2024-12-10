@@ -42,6 +42,7 @@ jobs:
                   composer config --unset "repositories.skeleton-vite"
                   composer config --unset "repositories.skeleton-deployment"
                   composer config --unset "repositories.skeleton-typo3"
+                  composer config --unset "repositories.skeleton-vite-static-middleware"
                   rm composer.lock
                   composer remove --no-update --dev "faktore/fe-skeleton-*"
                   cat composer.json
@@ -81,6 +82,7 @@ jobs:
                   composer config --unset "repositories.skeleton-vite"
                   composer config --unset "repositories.skeleton-deployment"
                   composer config --unset "repositories.skeleton-typo3"
+                  composer config --unset "repositories.skeleton-vite-static-middleware"
                   rm composer.lock
                   composer remove --no-update --dev "faktore/fe-skeleton-*"
                   cat composer.json
@@ -103,6 +105,7 @@ jobs:
                     - "php:cs-fixer"
                     - "php:sniff"
                     - "php:stan"
+                    - "php:unit"
                 php-version:
                     - "8.3"
     report_failure:

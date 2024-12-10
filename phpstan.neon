@@ -7,12 +7,13 @@ includes:
   - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
   - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
   - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
+  - phar://phpstan.phar/conf/bleedingEdge.neon
 
 conditionalTags:
-	PHPStan\Rules\DisallowedConstructs\DisallowedEmptyRule:
-		phpstan.rules.rule: false
-	PHPStan\Rules\DisallowedConstructs\DisallowedShortTernaryRule:
-		phpstan.rules.rule: false
+  PHPStan\Rules\DisallowedConstructs\DisallowedEmptyRule:
+    phpstan.rules.rule: false
+  PHPStan\Rules\DisallowedConstructs\DisallowedShortTernaryRule:
+    phpstan.rules.rule: false
 
 parameters:
   parallel:
