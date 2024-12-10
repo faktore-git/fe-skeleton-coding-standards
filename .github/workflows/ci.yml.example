@@ -10,7 +10,7 @@ on:
             - production
             - main
 env:
-    CI_GIT_BRANCH: 'feature/vite'
+    CI_GIT_BRANCH: 'development'
     ACTION_URL: 'https://github.com/faktore-git/grur/actions'
 
 permissions:
