@@ -58,7 +58,6 @@
     <rule ref="Generic.Classes.DuplicateClassName"/>
     <rule ref="PSR1.Classes.ClassDeclaration"/>
     <rule ref="Squiz.Classes.ClassFileName"/>
-    <rule ref="Squiz.Classes.DuplicateProperty"/>
     <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
     <rule ref="Squiz.Classes.SelfMemberReference"/>
 
@@ -101,7 +100,6 @@
     <rule ref="PEAR.Formatting.MultiLineAssignment"/>
 
     <!-- Functions -->
-    <rule ref="Generic.Functions.CallTimePassByReference"/>
     <rule ref="Squiz.Functions.FunctionDuplicateArgument"/>
     <rule ref="Squiz.Functions.GlobalFunction"/>
 
@@ -114,9 +112,6 @@
     <!-- Naming conventions -->
     <rule ref="Generic.NamingConventions.ConstructorName"/>
     <rule ref="PEAR.NamingConventions.ValidClassName"/>
-
-    <!-- Objects -->
-    <rule ref="Squiz.Objects.ObjectMemberComma"/>
 
     <!-- Operators -->
     <rule ref="Squiz.Operators.IncrementDecrementUsage"/>
@@ -156,6 +151,5 @@
             <property name="ignoreNewlines" value="true" />
         </properties>
     </rule>
-    <rule ref="Squiz.WhiteSpace.PropertyLabelSpacing"/>
     <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
 </ruleset>
